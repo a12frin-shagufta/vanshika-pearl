@@ -1,0 +1,58 @@
+import React from 'react';
+import { Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import Collection from './pages/Collection';
+import About from './pages/About';
+import Contact from './pages/Contact';
+import Product from './pages/Product';
+import PlaceOrder from './pages/PlaceOrder';
+import Order from './pages/Order';
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
+import Cart from './pages/Cart';
+import ThankYou from './pages/ThankYou';
+import RefundPolicy from './components/RefundPolicy';
+import TermsConditions from './components/TermsConditions';
+import PrivacyPolicy from './components/PrivacyPolicy';
+import ScrollToTop from './components/ScrollToTop'; // 👈 Import
+import Testimonial from './pages/Testimonial';
+import BestSeller from './components/BestSeller';
+import OurPolicy from './components/OurPolicy';
+import 'react-phone-input-2/lib/style.css';
+import UploadProof from './pages/UploadProof';
+import FeaturesSection from './components/FeaturesSection';
+
+const App = () => {
+  return (
+    <div className="min-h-screen flex flex-col">
+      <Navbar />
+      <ScrollToTop /> {/* 👈 Add this line */}
+      
+      <main className="">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/collection" element={<Collection />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/product/:productId" element={<Product />} />
+          <Route path="/place-order" element={<PlaceOrder />} />
+          <Route path="/order" element={<Order />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/thank-you" element={<ThankYou />} />
+          <Route path="/refund-policy" element={<RefundPolicy />} />
+          <Route path="/terms-conditions" element={<TermsConditions />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/testimonials" element={<Testimonial />} />
+          <Route path="/bestseller" element={<BestSeller />} />
+          <Route path="/our-policy" element={<OurPolicy />} />
+           <Route path="/upload-proof" element={<UploadProof />} />
+          <Route path="/features" element={<FeaturesSection />} />
+        </Routes>
+      </main>
+
+      <Footer />
+    </div>
+  );
+};
+
+export default App;

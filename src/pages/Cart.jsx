@@ -1,0 +1,314 @@
+// src/pages/Cart.jsx
+import React, { useContext, useEffect, useState } from "react";
+import { ShopContext } from "../context/ShopContext";
+import { Link } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
+import { FiShoppingBag, FiArrowRight, FiTrash2 } from "react-icons/fi";
+import { FaArrowLeft } from "react-icons/fa";
+
+// --- helpers ---
+const PLACEHOLDER_THUMB =
+  "data:image/svg+xml;utf8," +
+  encodeURIComponent(
+    `<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'>
+       <rect width='100%' height='100%' fill='#f3f4f6'/>
+       <text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle'
+         fill='#9ca3af' font-family='Arial' font-size='14'>No media</text>
+     </svg>`
+  );
+
+const urlFromAny = (val) => {
+  if (!val) return null;
+  if (typeof val === "string") return val;
+  if (Array.isArray(val)) {
+    for (const it of val) {
+      const u = urlFromAny(it);
+      if (u) return u;
+    }
+    return null;
+  }
+  if (typeof val === "object") {
+    return (
+      urlFromAny(val.secure_url) ||
+      urlFromAny(val.url) ||
+      urlFromAny(val.src) ||
+      urlFromAny(val.path) ||
+      urlFromAny(val.image) ||
+      null
+    );
+  }
+  return null;
+};
+
+const pickThumbMedia = (product, variant) => {
+  const img =
+    urlFromAny(variant?.images?.[0]) ||
+    urlFromAny(product?.image) ||
+    null;
+
+  const vid =
+    urlFromAny(variant?.videos?.[0]) ||
+    urlFromAny(product?.videos?.[0]) ||
+    null;
+
+  return {
+    image: img,
+    video: vid,
+    poster: img || PLACEHOLDER_THUMB,
+  };
+};
+
+const Cart = () => {
+  const {
+    products,
+    currency,
+    cartItems,       
+ removeFromCart,          // backward-compat
+   updateQuantity,          // backward-compat
+  removeFromCartByKey,     // ✅ precise (new, if in ShopContext)
+  updateQuantityByKey,
+    delivery_fee,
+    navigate,
+    clearCart,
+  } = useContext(ShopContext);
+
+  const [cartData, setCartData] = useState([]);
+  const [isProcessing, setIsProcessing] = useState(false);
+
+  // Build cartData from cartItems array + product lookup
+  useEffect(() => {
+    const items = (cartItems || [])
+      .map((ci) => {
+        if (!ci || !ci.productId) return null;
+        const product = products.find((p) => String(p._id) === String(ci.productId));
+        if (!product) return null;
+
+        // Find variant by id first, fallback to color match if variantId missing
+        let variant = null;
+        if (ci.variantId) {
+          variant = product.variants?.find((v) => String(v._id) === String(ci.variantId));
+        }
+        if (!variant && ci.variantColor) {
+          variant = product.variants?.find(
+            (v) => (v.color || "").toLowerCase() === String(ci.variantColor).toLowerCase()
+          );
+        }
+
+        // 👇 updated: pick video or image
+        const { image, video, poster } = pickThumbMedia(product, variant);
+
+        const priceToUse = product.finalPrice ?? product.price;
+        const quantity = Math.max(1, Number(ci.quantity) || 1);
+         const engravingFirstName = (ci.engravingFirstName || "").trim();
+          const engravingLastName  = (ci.engravingLastName  || "").trim();
+           // prefer existing cartKey from context; fallback to a deterministic one
+           const cartKey = ci.cartKey || `${ci.productId}__${ci.variantId || ci.variantColor || "default"}__fn_${engravingFirstName.toLowerCase()}__ln_${engravingLastName.toLowerCase()}`;
+
+
+        return {
+          cartKey,
+          productId: ci.productId,
+          variantId: ci.variantId || null,
+          name: product.name,
+          color: variant?.color || ci.variantColor || "default",
+          engravingFirstName,
+          engravingLastName,
+          image,
+          video,
+          poster,
+          price: product.price,
+          finalPrice: product.finalPrice,
+          priceToUse,
+          quantity,
+          total: Number((quantity * priceToUse).toFixed(2)),
+        };
+      })
+      .filter(Boolean);
+
+    setCartData(items);
+    console.debug("Cart items mapped:", items);
+  }, [cartItems, products]);
+
+ const handleQuantityChange = (item, newQuantity) => {
+   newQuantity = Number(newQuantity || 0);
+   if (newQuantity >= 1) {
+     if (typeof updateQuantityByKey === "function") {
+       updateQuantityByKey(item.cartKey, newQuantity);    // ✅ precise
+     } else {
+       updateQuantity(item.productId, item.variantId, newQuantity); // fallback
+     }
+   }
+ };
+
+  const handleRemoveItem = (item) => {
+   if (typeof removeFromCartByKey === "function") {
+     removeFromCartByKey(item.cartKey);     // ✅ precise
+   } else {
+     removeFromCart(item.productId, item.variantId); // fallback
+   }
+ };
+
+
+  const subtotal = cartData.reduce((sum, item) => sum + Number(item.total || 0), 0);
+
+  const shipping = subtotal > 3000 ? 0 : Number(delivery_fee || 0);
+  const grandTotal = subtotal + shipping;
+
+  if (cartData.length === 0) {
+    return (
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        className="min-h-[70vh] flex flex-col justify-center items-center py-20 text-center px-4"
+      >
+        <div className="bg-amber-100 p-6 rounded-full mb-6">
+          <FiShoppingBag className="w-12 h-12 text-amber-600" />
+        </div>
+        <h2 className="text-2xl md:text-3xl font-serif font-light text-amber-900 mb-4">
+          Your cart is empty
+        </h2>
+        <p className="text-amber-700 mb-8 max-w-md">
+          Looks like you haven't added any beautiful pieces to your cart yet.
+        </p>
+        <Link
+          to="/collection"
+          className="px-8 py-3 bg-amber-600 text-white rounded-full hover:bg-amber-700 transition-all flex items-center gap-2"
+        >
+          <FaArrowLeft /> Browse Collection
+        </Link>
+      </motion.div>
+    );
+  }
+
+  return (
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}
+      className="max-w-4xl mx-auto px-4 sm:px-6 py-8 md:py-12">
+      <div className="mb-8">
+        <Link to="/collection" className="flex items-center text-black/80 hover:text-amber-900 transition-colors">
+          <FaArrowLeft className="mr-2" /> Continue Shopping
+        </Link>
+        <h2 className="text-2xl md:text-3xl font-serif font-light text-black/80 mt-4">Your Shopping Cart</h2>
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="lg:col-span-2">
+          <div className="space-y-6">
+            <AnimatePresence>
+              {cartData.map((item) => (
+                <motion.div key={item.cartKey}
+                  initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, x: -20 }}
+                  transition={{ duration: 0.3 }} className="flex flex-col sm:flex-row gap-6 p-4 bg-white rounded-md shadow-sm ">
+                  <div className="flex-shrink-0">
+  {item.image ? (
+    // 🖼️ Show image if available (even if video also exists)
+    <img
+      src={item.image}
+      alt={item.name}
+      className="w-full h-32 sm:w-32 sm:h-32 object-cover rounded-lg"
+      onError={(e) => { e.currentTarget.src = item.poster || PLACEHOLDER_THUMB; }}
+    />
+  ) : item.video ? (
+    // 🎥 Only show video if no image
+    <video
+      src={item.video}
+      className="w-full h-32 sm:w-32 sm:h-32 object-cover rounded-lg"
+      muted
+      playsInline
+      autoPlay
+      loop
+      preload="metadata"
+      poster={item.poster}
+      onError={(e) => {
+        e.currentTarget.outerHTML = `<img src="${item.poster}" class="w-full h-32 sm:w-32 sm:h-32 object-cover rounded-lg" alt="${item.name}" />`;
+      }}
+    />
+  ) : (
+    // 🕳️ Placeholder fallback
+    <img
+      src={item.poster || PLACEHOLDER_THUMB}
+      alt={item.name}
+      className="w-full h-32 sm:w-32 sm:h-32 object-contain rounded-lg"
+    />
+  )}
+</div>
+
+
+                  <div className="flex-1">
+                    <div className="flex justify-between">
+                      <h4 className="text-lg font-medium text-black/80">{item.name}</h4>
+                      <button onClick={() => handleRemoveItem(item)}  className="text-gray-400 hover:text-amber-800 transition-colors">
+                        <FiTrash2 />
+                      </button>
+                    </div>
+
+                    <p className="text-sm text-gray-500 mt-1">
+   Color: {item.color}
+   {(item.engravingFirstName || item.engravingLastName) && (
+     <> · Name: <span className="font-medium">
+       {`${item.engravingFirstName} ${item.engravingLastName}`.trim()}
+     </span></>
+   )}
+ </p>
+
+                    <p className="text-2xl font-medium text-black/80 mt-2">
+                      {item.finalPrice && item.finalPrice < item.price ? (
+                        <>
+                          <span className="line-through text-gray-400 mr-2">{currency} {item.price.toLocaleString()}</span>
+                          <span>{currency} {item.finalPrice.toLocaleString()}</span>
+                        </>
+                      ) : (
+                        <>{currency} {item.price.toLocaleString()}</>
+                      )}
+                    </p>
+
+                    <div className="flex items-center justify-between mt-4">
+                      <div className="flex items-center border border-black/20 rounded-lg">
+                        <button onClick={() => handleQuantityChange(item, item.quantity - 1)}className="px-3 py-1 text-[#eba5aa] hover:bg-amber-50 transition-colors">-</button>
+                        <span className="px-4 py-1">{item.quantity}</span>
+                        <button onClick={() => handleQuantityChange(item, item.quantity + 1)} className="px-3 py-1 text-[#eba5aa] hover:bg-amber-50 transition-colors">+</button>
+                      </div>
+
+                      <p className="text-sm font-semibold text-[#eba5aa]">Total: {currency} {item.total}</p>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </AnimatePresence>
+          </div>
+        </div>
+
+        {/* Order Summary */}
+        <div className="lg:col-span-1">
+          <div className="bg-white p-6 rounded-sm shadow-sm sticky top-8">
+            <h3 className="text-xl font-serif font-light text-black/80 mb-6 pb-2 border-b border-black/20">Order Summary</h3>
+
+            <div className="space-y-4 mb-6">
+              <div className="flex justify-between"><span className="text-gray-900">Subtotal</span><span className="font-medium text-black/80"> {subtotal.toFixed(2)} {currency}</span></div>
+              <div className="flex justify-between">
+                <span className="text-gray-700">Delivery </span>
+                <span className="font-medium ml-10 text-black/80">
+                 {shipping} {currency}
+                 {shipping === 0 &&  <span className="ml-2 text-xs text-green-600">(Free delivery for orders over 3000)</span>}
+                </span>
+              </div>
+              <div className="flex justify-between pt-4 border-t border-black/20"><span className="text-lg font-medium text-amber-900">Total</span><span className="text-lg font-medium text-black/80"> {grandTotal.toFixed(2)} {currency}</span></div>
+            </div>
+
+            <motion.button onClick={() => navigate("/place-order")} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} disabled={isProcessing}
+              className={`w-full flex items-center justify-center gap-2 px-3 py-3 rounded-sm font-medium transition-all ${isProcessing ? "bg-[#eba5aa] cursor-not-allowed" : "bg-[#eba5aa] text-white hover:bg-amber-700 shadow-md hover:shadow-lg"}`}>
+              {isProcessing ? "Processing..." : <>Proceed to Checkout <FiArrowRight /></>}
+            </motion.button>
+
+            {/* <motion.button onClick={clearCart} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="mt-4 w-full flex items-center justify-center gap-2 px-6 py-2 rounded-full text-sm font-medium bg-red-100 text-red-700 hover:bg-red-200 transition-all">
+              <FiTrash2 /> Reset Cart
+            </motion.button> */}
+
+            <p className="text-xs text-amber-600 mt-4 text-center">Secure delivery within 11-13 business days</p>
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+};
+
+export default Cart;
