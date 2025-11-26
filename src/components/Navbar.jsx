@@ -18,7 +18,7 @@ const Navbar = () => {
   ];
 
   return (
-    <header className="w-full  top-0 z-50 bg-[#fffdf8]">
+    <header className="w-full top-0 z-50 bg-[#fffdf8]">
       {/* thin social strip */}
       <div className="w-full bg-[#f7f5f1] border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
@@ -38,8 +38,18 @@ const Navbar = () => {
       {/* main header */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-25 md:h-[100px]">
+          {/* Mobile: Left menu icon */}
+          <div className="flex md:hidden items-center">
+            <button
+              onClick={() => setIsMenuOpen((s) => !s)}
+              className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:bg-gray-100"
+              aria-label="Toggle menu"
+            >
+              {isMenuOpen ? <FiX className="h-6 w-6" /> : <FiMenu className="h-6 w-6" />}
+            </button>
+          </div>
 
-          {/* left nav (desktop) */}
+          {/* Desktop: Left nav */}
           <div className="hidden md:flex items-center space-x-8">
             {navLinks.map((link) => (
               <NavLink
@@ -54,24 +64,26 @@ const Navbar = () => {
             ))}
           </div>
 
-          {/* logo center */}
-          <div className="flex-shrink-0 flex items-center justify-center mx-auto md:mx-0">
+          {/* Logo center - always centered */}
+          <div className="flex-shrink-0 flex items-center justify-center absolute left-1/2 transform -translate-x-1/2 md:relative md:left-auto md:transform-none">
             <NavLink to="/" className="block">
               {/* swap src to your logo path */}
               <img src="/images/logo.png" alt="logo" className="h-25 md:h-30 w-auto" />
             </NavLink>
           </div>
 
-          {/* right controls (desktop) */}
-          <div className="hidden md:flex items-center space-x-4">
-            <button
+          {/* Right controls */}
+          <div className="flex items-center space-x-4">
+            {/* Desktop search (optional) */}
+            {/* <button
               onClick={() => navigate("/search")}
-              className="p-2 rounded hover:bg-gray-100 text-gray-700"
+              className="hidden md:block p-2 rounded hover:bg-gray-100 text-gray-700"
               aria-label="Search"
             >
               <FiSearch className="h-5 w-5" />
-            </button>
+            </button> */}
 
+            {/* Cart icon - visible on both mobile and desktop */}
             <NavLink to="/cart" className="relative p-2 rounded hover:bg-gray-100 text-gray-700">
               <CiShoppingCart className="h-5 w-5" />
               {getCartCount() > 0 && (
@@ -80,17 +92,6 @@ const Navbar = () => {
                 </span>
               )}
             </NavLink>
-          </div>
-
-          {/* mobile: left hamburger (keeps logo centered) */}
-          <div className="flex md:hidden items-center space-x-2">
-            <button
-              onClick={() => setIsMenuOpen((s) => !s)}
-              className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:bg-gray-100"
-              aria-label="Toggle menu"
-            >
-              {isMenuOpen ? <FiX className="h-6 w-6" /> : <FiMenu className="h-6 w-6" />}
-            </button>
           </div>
         </div>
       </div>
@@ -111,29 +112,19 @@ const Navbar = () => {
             </NavLink>
           ))}
 
-          <div className="flex items-center space-x-3 pt-2">
-            <button onClick={() => navigate("/search")} className="p-2 rounded hover:bg-gray-100 text-gray-700">
-              <FiSearch className="h-5 w-5" />
-            </button>
-
-            <NavLink to="/cart" onClick={() => setIsMenuOpen(false)} className="relative p-2 rounded hover:bg-gray-100 text-gray-700">
-              <CiShoppingCart className="h-5 w-5" />
-              {getCartCount() > 0 && (
-                <span className="absolute -top-0 -right-0 w-5 h-5 bg-amber-700 text-white text-xs font-bold rounded-full flex items-center justify-center shadow-sm">
-                  {getCartCount()}
-                </span>
-              )}
-            </NavLink>
-          </div>
-
-          <div className="pt-3 border-t border-gray-100 flex items-center space-x-3">
-            <a href="#" aria-label="facebook" className="text-gray-600 hover:text-amber-700"><FaFacebookF className="w-4 h-4"/></a>
-            <a href="#" aria-label="instagram" className="text-gray-600 hover:text-amber-700"><FaInstagram className="w-4 h-4"/></a>
-            <a href="#" aria-label="youtube" className="text-gray-600 hover:text-amber-700"><FaYoutube className="w-4 h-4"/></a>
-            <a href="#" aria-label="tiktok" className="text-gray-600 hover:text-amber-700"><FaTiktok className="w-4 h-4"/></a>
-            <a href="#" aria-label="twitter" className="text-gray-600 hover:text-amber-700"><FaTwitter className="w-4 h-4"/></a>
-            <a href="#" aria-label="pinterest" className="text-gray-600 hover:text-amber-700"><FaPinterest className="w-4 h-4"/></a>
-          </div>
+          {/* Mobile search (optional) */}
+          {/* <button 
+            onClick={() => { 
+              navigate("/search"); 
+              setIsMenuOpen(false); 
+            }} 
+            className="block w-full text-left px-2 py-2 rounded text-base text-gray-700 hover:bg-gray-50"
+          >
+            <div className="flex items-center space-x-2">
+              <FiSearch className="h-4 w-4" />
+              <span>Search</span>
+            </div>
+          </button> */}
         </div>
       </div>
     </header>
