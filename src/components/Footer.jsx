@@ -135,7 +135,7 @@ const Footer = () => {
           <p className="text-xs text-gray-600">
             &copy; {new Date().getFullYear()} vanshinecollection's profile picture
 vanshinecollection
-. All rights reserved. i just wat
+. All rights reserved. 
           </p>
           {/* <p className="text-xs text-gray-600 mt-1">
             Handmade with love in Pakistan

@@ -136,7 +136,7 @@ const pickFirstVideo = (p) => {
         <div className="text-center py-12 bg-white rounded-xl border border-gray-100">
           <p className="text-gray-600">No new arrivals right now — check back soon.</p>
           <Link to="/collection">
-            <button className="mt-4 px-5 py-2 rounded-full bg-amber-600 text-white">View All</button>
+            <button className="mt-4 px-5 py-2 rounded-sm bg-[#eba5aa] text-white">View All</button>
           </Link>
         </div>
       ) : (
