@@ -3,7 +3,7 @@ import React, { useContext, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { FiMenu, FiX, FiSearch } from "react-icons/fi";
 import { CiShoppingCart } from "react-icons/ci";
-import { FaFacebookF, FaInstagram, FaYoutube, FaTiktok, FaTwitter, FaPinterest } from "react-icons/fa";
+import { FaFacebookF, FaInstagram, FaYoutube, FaTiktok, FaWhatsapp } from "react-icons/fa";
 import { ShopContext } from "../context/ShopContext";
 
 const Navbar = () => {
@@ -24,12 +24,13 @@ const Navbar = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
           <div className="flex items-center justify-center h-8">
             <div className="flex items-center space-x-3 text-sm text-gray-600">
-              <a href="#" aria-label="facebook" className="hover:text-amber-700"><FaFacebookF className="w-3 h-3" /></a>
-              <a href="#" aria-label="instagram" className="hover:text-amber-700"><FaInstagram className="w-3 h-3" /></a>
-              <a href="#" aria-label="youtube" className="hover:text-amber-700"><FaYoutube className="w-3 h-3" /></a>
-              <a href="#" aria-label="tiktok" className="hover:text-amber-700"><FaTiktok className="w-3 h-3" /></a>
-              <a href="#" aria-label="twitter" className="hover:text-amber-700"><FaTwitter className="w-3 h-3" /></a>
-              <a href="#" aria-label="pinterest" className="hover:text-amber-700"><FaPinterest className="w-3 h-3" /></a>
+              {/* <a href="#" aria-label="facebook" className="hover:text-amber-700"><FaFacebookF className="w-3 h-3" /></a> */}
+              <a href="#" aria-label="instagram" className="hover:text-amber-700"><FaInstagram className="w-4 h-4" /></a>
+              {/* <a href="#" aria-label="youtube" className="hover:text-amber-700"><FaYoutube className="w-3 h-3" /></a> */}
+              <a href="#" aria-label="tiktok" className="hover:text-amber-700"><FaTiktok className="w-4 h-4" /></a>
+               <a href="#" aria-label="tiktok" className="hover:text-amber-700"><FaWhatsapp className="w-4 h-4" /></a>
+              {/* <a href="#" aria-label="twitter" className="hover:text-amber-700"><FaTwitter className="w-3 h-3" /></a> */}
+              {/* <a href="#" aria-label="pinterest" className="hover:text-amber-700"><FaPinterest className="w-3 h-3" /></a> */}
             </div>
           </div>
         </div>
