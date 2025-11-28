@@ -5,7 +5,7 @@ import { FaEnvelope, FaInstagram, FaHeart, FaTiktok } from "react-icons/fa";
 const Contact = () => {
   const BUSINESS_EMAIL = "centsandsoul@gmail.com";
   const INSTAGRAM_URL = "https://www.instagram.com/vanshinecollection/";;
-  const TIKTOK_URL = "https://www.tiktok.com/@pleasant.pearl?_t=ZS-8xaR5rVOsKG&_r=1";
+  // const TIKTOK_URL = "https://www.tiktok.com/@pleasant.pearl?_t=ZS-8xaR5rVOsKG&_r=1";
 
   return (
     <motion.div
