@@ -37,7 +37,7 @@ const Footer = () => {
                 <FaTiktok className="w-5 h-5" />
               </a>
               <a 
-                href="https://api.whatsapp.com/send/?phone=923171731789&text&type=phone_number&app_absent=0" 
+                href="" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-gray-400  transition-colors"
