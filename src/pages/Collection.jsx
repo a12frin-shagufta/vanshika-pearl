@@ -329,32 +329,69 @@ if (specialFilter === "bestseller") {
               <motion.div initial="hidden" animate="visible" variants={fadeIn} className="space-y-6">
                 {/* product grid */}
                 {viewMode === "list" ? (
-                  <div className="space-y-4">
-                    {filterProducts.map((item) => (
-                      <motion.div key={item._id} variants={fadeIn} className="bg-white p-4 rounded-xl  shadow-sm flex gap-4 items-center transition-transform hover:shadow-md">
-                        {/* Card wrapper: outer border only */}
-<div className="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm">
-  {/* image container — no border, just overflow-hidden to clip rounded corners */}
-  <div className="w-full h-64 overflow-hidden bg-gray-100">
-    <img
-      src={image}
-      alt={name}
-      className="w-full h-full object-cover block rounded-none"
-      style={{ display: "block" }}
-    />
-  </div>
+  <div className="space-y-4">
+    {filterProducts.map((item) => {
+      const imageSrc = pickFirstImage(item);
+      const finalPriceToShow = item.finalPrice ?? item.price;
 
-  {/* card body */}
-  <div className="p-4">
-    <h3 className="text-lg font-semibold text-gray-900">{name}</h3>
-    <div className="mt-3 font-semibold text-amber-700">${finalPrice ?? price}</div>
-  </div>
-</div>
+      return (
+        <motion.div
+          key={item._id}
+          variants={fadeIn}
+          className="bg-white p-4 rounded-xl shadow-sm flex gap-4 items-center hover:shadow-md transition-transform"
+        >
+          {/* Image */}
+          <div className="w-28 h-28 sm:w-32 sm:h-32 flex-shrink-0 overflow-hidden bg-gray-100 rounded-lg">
+            {imageSrc ? (
+              <img
+                src={imageSrc}
+                alt={item.name}
+                className="w-full h-full object-cover block"
+                loading="lazy"
+              />
+            ) : (
+              <div className="w-full h-full flex items-center justify-center text-xs text-gray-400">
+                No image
+              </div>
+            )}
+          </div>
 
-                      </motion.div>
-                    ))}
-                  </div>
-                ) : (
+          {/* Content */}
+          <div className="flex-1 min-w-0">
+            <h3 className="text-sm sm:text-base md:text-lg font-semibold text-gray-900 line-clamp-2">
+              {item.name}
+            </h3>
+
+            {/* Optional: badge for bestseller */}
+            {item.bestseller && (
+              <p className="inline-block mt-1 text-[11px] px-2 py-0.5 rounded-full bg-amber-50 text-amber-700 border border-amber-200">
+                Bestseller
+              </p>
+            )}
+
+            {/* Price */}
+            <div className="mt-2 flex items-center gap-2">
+              <span className="text-base sm:text-lg font-semibold text-amber-700">
+                ₹{finalPriceToShow?.toFixed?.(0) ?? finalPriceToShow}
+              </span>
+              {item.finalPrice && item.finalPrice < item.price && (
+                <>
+                  <span className="text-xs sm:text-sm text-gray-400 line-through">
+                    ₹{item.price?.toFixed?.(0) ?? item.price}
+                  </span>
+                  <span className="text-[11px] sm:text-xs text-green-600 font-medium">
+                    {Math.round(((item.price - item.finalPrice) / item.price) * 100)}% off
+                  </span>
+                </>
+              )}
+            </div>
+          </div>
+        </motion.div>
+      );
+    })}
+  </div>
+) : (
+ 
                   <div className={`grid gap-4 md:gap-6 ${gridColsClass()}`}>
                     {filterProducts.map((item) => (
                       <motion.div key={item._id} variants={fadeIn} className={`bg-white  overflow-hidden shadow-sm hover:shadow-md transition-all duration-300  ${viewMode === "full" ? "col-span-1 md:col-span-1 lg:col-span-1" : ""}`}>

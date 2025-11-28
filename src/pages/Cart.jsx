@@ -161,8 +161,8 @@ const Cart = () => {
         animate={{ opacity: 1 }}
         className="min-h-[70vh] flex flex-col justify-center items-center py-20 text-center px-4"
       >
-        <div className="bg-amber-100 p-6 rounded-full mb-6">
-          <FiShoppingBag className="w-12 h-12 text-amber-600" />
+        <div className="bg-amber-50 p-6 rounded-full mb-6">
+          <FiShoppingBag className="w-12 h-12 text-[#eba5aa]" />
         </div>
         <h2 className="text-2xl md:text-3xl font-serif font-light text-amber-900 mb-4">
           Your cart is empty
@@ -172,7 +172,7 @@ const Cart = () => {
         </p>
         <Link
           to="/collection"
-          className="px-8 py-3 bg-amber-600 text-white rounded-full hover:bg-amber-700 transition-all flex items-center gap-2"
+          className="px-8 py-3 bg-[#eba5aa] text-white rounded-sm hover:bg-amber-700 transition-all flex items-center gap-2"
         >
           <FaArrowLeft /> Browse Collection
         </Link>
@@ -253,8 +253,8 @@ const Cart = () => {
                     <p className="text-2xl font-medium text-black/80 mt-2">
                       {item.finalPrice && item.finalPrice < item.price ? (
                         <>
-                          <span className="line-through text-gray-400 mr-2">{currency} {item.price.toLocaleString()}</span>
-                          <span>{currency} {item.finalPrice.toLocaleString()}</span>
+                          <span className="line-through text-gray-400 mr-2">{currency}{item.price.toLocaleString()}</span>
+                          <span>{currency}{item.finalPrice.toLocaleString()}</span>
                         </>
                       ) : (
                         <>{currency} {item.price.toLocaleString()}</>
@@ -268,7 +268,7 @@ const Cart = () => {
                         <button onClick={() => handleQuantityChange(item, item.quantity + 1)} className="px-3 py-1 text-[#eba5aa] hover:bg-amber-50 transition-colors">+</button>
                       </div>
 
-                      <p className="text-sm font-semibold text-[#eba5aa]">Total: {currency} {item.total}</p>
+                      <p className="text-sm font-semibold text-[#eba5aa]">Total: {currency}{item.total}</p>
                     </div>
                   </div>
                 </motion.div>
@@ -283,15 +283,15 @@ const Cart = () => {
             <h3 className="text-xl font-serif font-light text-black/80 mb-6 pb-2 border-b border-black/20">Order Summary</h3>
 
             <div className="space-y-4 mb-6">
-              <div className="flex justify-between"><span className="text-gray-900">Subtotal</span><span className="font-medium text-black/80"> {subtotal.toFixed(2)} {currency}</span></div>
+              <div className="flex justify-between"><span className="text-gray-900">Subtotal</span><span className="font-medium text-black/80"> {currency}{subtotal.toFixed(2)} </span></div>
               <div className="flex justify-between">
                 <span className="text-gray-700">Delivery </span>
                 <span className="font-medium ml-10 text-black/80">
-                 {shipping} {currency}
+                 {currency}{shipping} 
                  {shipping === 0 &&  <span className="ml-2 text-xs text-green-600">(Free delivery for orders over 3000)</span>}
                 </span>
               </div>
-              <div className="flex justify-between pt-4 border-t border-black/20"><span className="text-lg font-medium text-amber-900">Total</span><span className="text-lg font-medium text-black/80"> {grandTotal.toFixed(2)} {currency}</span></div>
+              <div className="flex justify-between pt-4 border-t border-black/20"><span className="text-lg font-medium text-amber-900">Total</span><span className="text-lg font-medium text-black/80">{currency}{grandTotal.toFixed(2)} </span></div>
             </div>
 
             <motion.button onClick={() => navigate("/place-order")} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} disabled={isProcessing}

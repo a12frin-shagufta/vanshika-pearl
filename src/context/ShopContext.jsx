@@ -12,47 +12,7 @@ const ShopContextProvider = (props) => {
   const delivery_fee = 250;
   const navigate = useNavigate();
 
-  const [products, setProducts] = useState([]);
-  const [offers, setOffers] = useState([]);
-  const [loadingProducts, setLoadingProducts] = useState(true);
-  const [categories, setCategories] = useState([]);
-
-  // CART: use an array of items { productId, variantId, variantColor, quantity }
-  const [cartItems, setCartItems] = useState(() => {
-    try {
-      // Try new schema first
-      const rawNew = localStorage.getItem(LOCAL_KEY);
-      if (rawNew) {
-        const parsed = JSON.parse(rawNew);
-        if (Array.isArray(parsed)) return parsed.filter((it) => it?.productId && (it?.quantity || 0) > 0);
-      }
-
-      // Backfill from old schema (guestCart_v1)
-      const rawOld = localStorage.getItem("guestCart_v1");
-      if (!rawOld) return [];
-      const old = JSON.parse(rawOld);
-      if (!Array.isArray(old)) return [];
-
-      return old
-        .map((it) => {
-          const clean = {
-            productId: String(it.productId),
-            variantId: it.variantId ? String(it.variantId) : null,
-            variantColor: it.variantColor || null,
-            quantity: Math.max(0, Number(it.quantity) || 0),
-            // NEW: defaults
-            engravingFirstName: "",
-            engravingLastName: "",
-          };
-          return { ...clean, cartKey: makeCartKey(clean) };
-        })
-        .filter((it) => it.productId && it.quantity > 0);
-    } catch {
-      return [];
-    }
-  });
-
-  const makeCartKey = ({
+   const makeCartKey = ({
   productId,
   variantId,
   variantColor,
@@ -63,7 +23,66 @@ const ShopContextProvider = (props) => {
   const fn = String(engravingFirstName || "").trim().toLowerCase();
   const ln = String(engravingLastName || "").trim().toLowerCase();
   return `${productId}__${v}__fn_${fn}__ln_${ln}`;
-};
+}
+
+  const [products, setProducts] = useState([]);
+  const [offers, setOffers] = useState([]);
+  const [loadingProducts, setLoadingProducts] = useState(true);
+  const [categories, setCategories] = useState([]);
+
+  // CART: use an array of items { productId, variantId, variantColor, quantity }
+ const [cartItems, setCartItems] = useState(() => {
+  try {
+    // Try new schema first
+    const rawNew = localStorage.getItem(LOCAL_KEY);
+    if (rawNew) {
+      const parsed = JSON.parse(rawNew);
+      if (Array.isArray(parsed)) {
+        return parsed
+          .filter((it) => it?.productId && (it?.quantity || 0) > 0)
+          .map((it) => {
+            const clean = {
+              productId: String(it.productId),
+              variantId: it.variantId ? String(it.variantId) : null,
+              variantColor: it.variantColor || null,
+              quantity: Math.max(1, Number(it.quantity) || 1),
+              engravingFirstName: it.engravingFirstName || "",
+              engravingLastName: it.engravingLastName || "",
+            };
+            return {
+              ...clean,
+              cartKey: it.cartKey || makeCartKey(clean),
+            };
+          });
+      }
+    }
+
+    // Backfill from old schema (guestCart_v1)
+    const rawOld = localStorage.getItem("guestCart_v1");
+    if (!rawOld) return [];
+    const old = JSON.parse(rawOld);
+    if (!Array.isArray(old)) return [];
+
+    return old
+      .map((it) => {
+        const clean = {
+          productId: String(it.productId),
+          variantId: it.variantId ? String(it.variantId) : null,
+          variantColor: it.variantColor || null,
+          quantity: Math.max(1, Number(it.quantity) || 1),
+          engravingFirstName: "",
+          engravingLastName: "",
+        };
+        return { ...clean, cartKey: makeCartKey(clean) };
+      })
+      .filter((it) => it.productId && it.quantity > 0);
+  } catch {
+    return [];
+  }
+});
+
+
+ ;
   // -----------------------
   // Data fetching
   // -----------------------
@@ -217,23 +236,8 @@ const ShopContextProvider = (props) => {
   }, []);
 
 
-  // persist cart to localStorage whenever it changes
-  useEffect(() => {
-    try {
-      const toSave = cartItems
-        .filter((it) => it && it.productId && it.quantity > 0)
-        .map((it) => ({
-          productId: it.productId,
-          variantId: it.variantId,
-          variantColor: it.variantColor,
-          quantity: Number(it.quantity),
-        }));
-      localStorage.setItem(LOCAL_KEY, JSON.stringify(toSave));
-    } catch (e) {
-      console.warn("Failed to save cart:", e);
-    }
-  }, [cartItems]);
 
+  
   // -----------------------
   // CART API
   // -----------------------
