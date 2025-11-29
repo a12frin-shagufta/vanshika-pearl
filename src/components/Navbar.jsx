@@ -18,9 +18,9 @@ const Navbar = () => {
   ];
 
   return (
-    <header className="w-full top-0 z-50 bg-[#fffdf8]">
+    <header className="w-full top-0 z-50 bg-[#fffdf8a0]">
       {/* thin social strip */}
-      <div className="w-full bg-[#f7f5f1] border-b border-gray-200">
+      <div className="w-full bg-[#FBF2F5] border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
           <div className="flex items-center justify-center h-8">
             <div className="flex items-center space-x-3 text-sm text-gray-600">

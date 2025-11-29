@@ -86,7 +86,7 @@ const ShopByCollection = ({ className = "" }) => {
         className="group flex flex-col items-center text-center"
       >
         {/* Circle Image (responsive size) */}
-        <div className="w-35 h-35 sm:w-45 sm:h-45 md:w-50 md:h-50 rounded-full overflow-hidden border-2 border-purple-200 shadow-md group-hover:shadow-lg transition">
+        <div className="w-35 h-35 sm:w-45 sm:h-45 md:w-50 md:h-50 rounded-full overflow-hidden border-4 border-[#eba5aa] shadow-md group-hover:shadow-lg transition">
           <img
             src={cat.img}
             alt={cat.name}
