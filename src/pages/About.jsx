@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const AboutSection = () => {
   return (
-    <section className="w-full bg-white py-16 md:py-24">
+    <section className="w-full bg-[#ffebea]  py-16 md:py-24">
       <div className="mx-auto max-w-6xl px-4">
         <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
           {/* IMAGE - Larger and cleaner */}
@@ -19,12 +19,10 @@ const AboutSection = () => {
           {/* TEXT CONTENT */}
           <div className="w-full lg:w-1/2 space-y-6">
             <h2 className="text-4xl lg:text-5xl font-bold text-gray-900">
-              Our Mission
+            About Me
             </h2>
             <p className="text-lg text-gray-600 leading-relaxed">
-              I'm a paragraph. Click here to add your own text and edit me.
-              It's easy. Just click "Edit Text" or double click me to add
-              your own content and make changes to the font.
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos ullam ab cum porro accusantium suscipit. Dolorum odit numquam pariatur quaerat iure dolorem, nihil corporis commodi ab, doloremque nobis reprehenderit repellat?
             </p>
             <Link to='/contact'>
             <button className="px-8 py-3 bg-[#eba5aa] text-white font-semibold rounded-sm transition duration-200">
