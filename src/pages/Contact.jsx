@@ -5,7 +5,7 @@ import { FaEnvelope, FaInstagram, FaHeart, FaTiktok } from "react-icons/fa";
 const Contact = () => {
   const BUSINESS_EMAIL = "centsandsoul@gmail.com";
   const INSTAGRAM_URL = "https://www.instagram.com/vanshinecollection/";;
-  // const TIKTOK_URL = "https://www.tiktok.com/@pleasant.pearl?_t=ZS-8xaR5rVOsKG&_r=1";
+  const TIKTOK_URL = "https://www.tiktok.com/";
 
   return (
     <motion.div
@@ -41,7 +41,7 @@ const Contact = () => {
           {/* Email Card */}
           <motion.div
             whileHover={{ scale: 1.03, y: -5 }}
-            className="flex flex-col items-center text-center p-6 bg-amber-50 rounded-xl border border-amber-100 hover:bg-amber-100 transition-all duration-300"
+            className="flex flex-col items-center text-center p-6 bg-[#ffebea] rounded-xl   transition-all duration-300"
           >
             <div className="p-4 bg-[#f5d3d5] rounded-full text-white mb-4">
               <FaEnvelope className="text-2xl" />
@@ -60,7 +60,7 @@ const Contact = () => {
           {/* Instagram Card */}
           <motion.div
             whileHover={{ scale: 1.03, y: -5 }}
-            className="flex flex-col items-center text-center p-6 bg-amber-50 rounded-xl border border-amber-100 hover:bg-amber-100 transition-all duration-300"
+            className="flex flex-col items-center text-center p-6 bg-[#ffebea]  rounded-xl   transition-all duration-300"
           >
             <div className="p-4 bg-[#f5d3d5] rounded-full text-white mb-4">
               <FaInstagram className="text-2xl" />
@@ -82,7 +82,7 @@ const Contact = () => {
           {/* TikTok Card */}
           <motion.div
             whileHover={{ scale: 1.03, y: -5 }}
-            className="flex flex-col items-center text-center p-6 bg-amber-50 rounded-xl border border-amber-100 hover:bg-amber-100 transition-all duration-300"
+            className="flex flex-col items-center text-center p-6 bg-[#ffebea]  rounded-xl transition-all duration-300"
           >
             <div className="p-4 bg-[#f5d3d5] rounded-full text-white mb-4">
               <FaTiktok className="text-2xl" />
@@ -107,7 +107,7 @@ const Contact = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.8 }}
-          className="mt-8 text-center text-gray-600 p-4 bg-amber-50 rounded-lg border border-amber-100"
+          className="mt-8 text-center text-gray-600 p-4 bg-[#ffebea]  rounded-lg "
         >
           <p className="font-light">We'd love to hear from you! Reach out through any of these channels.</p>
         </motion.div>

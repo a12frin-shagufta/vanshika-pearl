@@ -1,5 +1,6 @@
 // src/components/AboutSection.jsx
 import React from "react";
+import { Link } from "react-router-dom";
 
 const AboutSection = () => {
   return (
@@ -25,10 +26,11 @@ const AboutSection = () => {
               It's easy. Just click "Edit Text" or double click me to add
               your own content and make changes to the font.
             </p>
-
-            <button className="px-8 py-3 bg-pink-500 text-white font-semibold rounded-full hover:bg-pink-600 transition duration-200">
+            <Link to='/contact'>
+            <button className="px-8 py-3 bg-[#eba5aa] text-white font-semibold rounded-sm transition duration-200">
               Contact us
             </button>
+            </Link>
           </div>
         </div>
       </div>
