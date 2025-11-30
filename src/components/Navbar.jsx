@@ -69,7 +69,7 @@ const Navbar = () => {
           <div className="flex-shrink-0 flex items-center justify-center absolute left-1/2 transform -translate-x-1/2 md:relative md:left-auto md:transform-none">
             <NavLink to="/" className="block">
               {/* swap src to your logo path */}
-              <img src="/images/logo.png" alt="logo" className="h-25 md:h-30 w-auto" />
+              <img src="/images/logo4.png" alt="logo" className=" h-12 md:h-20" />
             </NavLink>
           </div>
 

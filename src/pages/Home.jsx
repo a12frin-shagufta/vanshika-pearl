@@ -22,10 +22,12 @@ const Home = () => {
         <ShopByCollection/>
         <LatestCollection/>
         <BestSeller/>
+          <About/>  
         <FreaturesSection/>
+         
         {/* <Testimonial/> */}
         {/* <OurPolicy/>
-        <About/>  */}
+        // <About/>  */}
 
       </div>
     </div>

@@ -9,18 +9,18 @@ const slides = [
     alt: "Elegant jewelry hero 1",
   },
   // You can duplicate or replace these with other images
-  {
-    id: 2,
-    desktop: "/images/3.png",
-    mobile: "/images/2.png",
-    alt: "Elegant jewelry hero 2",
-  },
-  {
-    id: 3,
-    desktop: "/images/herod.png",
-    mobile: "/images/herom1.png",
-    alt: "Elegant jewelry hero 3",
-  },
+  // {
+  //   id: 2,
+  //   desktop: "/images/3.png",
+  //   mobile: "/images/2.png",
+  //   alt: "Elegant jewelry hero 2",
+  // },
+  // {
+  //   id: 3,
+  //   desktop: "/images/herod.png",
+  //   mobile: "/images/herom1.png",
+  //   alt: "Elegant jewelry hero 3",
+  // },
 ];
 
 export default function Hero() {
