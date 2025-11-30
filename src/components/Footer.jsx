@@ -10,13 +10,13 @@ const Footer = () => {
           {/* Brand Column */}
           <div className="flex flex-col items-center sm:items-start">
             <img 
-              src="/images/logo.png" 
+              src="/images/logo4.png" 
               alt="" 
               className="h-20 w-auto mb-4"
             />
-            <p className="text-gray-600 text-sm mb-4 sm:mb-6 max-w-xs text-center sm:text-left">
+            {/* <p className="text-gray-600 text-sm mb-4 sm:mb-6 max-w-xs text-center sm:text-left">
               Handcrafted jewelry blending tradition with contemporary design
-            </p>
+            </p> */}
             <div className="flex space-x-4">
               <a 
                 href="https://instagram.com" 
@@ -133,8 +133,7 @@ const Footer = () => {
         {/* Copyright Section */}
         <div className="  mt-6 pt-6 text-center">
           <p className="text-xs text-gray-600">
-            &copy; {new Date().getFullYear()} vanshinecollection's profile picture
-vanshinecollection
+            &copy; {new Date().getFullYear()}  vanshinecollection
 . All rights reserved. 
           </p>
           {/* <p className="text-xs text-gray-600 mt-1">
