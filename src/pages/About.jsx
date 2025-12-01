@@ -22,7 +22,11 @@ const AboutSection = () => {
             About Me
             </h2>
             <p className="text-lg text-gray-600 leading-relaxed">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos ullam ab cum porro accusantium suscipit. Dolorum odit numquam pariatur quaerat iure dolorem, nihil corporis commodi ab, doloremque nobis reprehenderit repellat?
+             At Vanshine, we curate handcrafted fashion accessories made with intention, artistry, and heart. 
+Our collection features beaded handbags, hand-wired jewelry, and beautifully crafted crochet pieces—each one handmade by talented women artisans around the world.
+
+We believe in fashion with purpose. Every purchase supports women’s craftsmanship, and empowers their creative independence. 
+Whether you’re gifting or treating yourself, you’re choosing something meaningful, timeless, and made with love
             </p>
             <Link to='/contact'>
             <button className="px-8 py-3 bg-[#eba5aa] text-white font-semibold rounded-sm transition duration-200">
