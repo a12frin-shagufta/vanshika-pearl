@@ -109,8 +109,8 @@ const ProductItem = React.memo(function ProductItem(props) {
   return (
     <div className="h-full flex flex-col rounded-md overflow-hidden bg-white border border-gray-200 hover:border-gray-300 transition mx-1">
       <Link to={`/product/${slug || id}`} className="block h-full flex flex-col">
-        {/* FIXED HEIGHT IMAGE — SAME FOR ALL CARDS */}
-        <div className="relative h-64 sm:h-72 md:h-80 bg-gray-50 overflow-hidden">
+        {/* 🔹 Smaller image on mobile, taller on larger screens */}
+        <div className="relative h-52 sm:h-64 md:h-72 bg-gray-50 overflow-hidden">
           <img
             src={src}
             srcSet={srcSet}
@@ -130,26 +130,29 @@ const ProductItem = React.memo(function ProductItem(props) {
           <Badge />
         </div>
 
-        {/* TEXT AREA */}
+        {/* 🔹 Tighter text area for less height */}
         <div className="px-2 py-2 sm:px-3 flex flex-col flex-grow">
+          {/* Clamp to 2 lines so it doesn't push card down too much */}
           <p
-            className="text-[14px] sm:text-base font-semibold text-gray-900 truncate"
+            className="text-[13px] sm:text-[14px] font-semibold text-gray-900 line-clamp-2 leading-snug"
             title={name}
           >
             {name}
           </p>
 
           {category && (
-            <p className="text-xs text-gray-500 truncate">{category}</p>
+            <p className="mt-0.5 text-[11px] text-gray-500 truncate">
+              {category}
+            </p>
           )}
 
           <div className="flex items-center gap-1.5 mt-1">
-            <span className="text-sm font-semibold text-gray-900">
+            <span className="text-[13px] sm:text-sm font-semibold text-gray-900">
               {currency} {Math.round(effFinal).toLocaleString()}
             </span>
 
             {hasDiscount && (
-              <span className="text-sm text-gray-400 line-through">
+              <span className="text-[11px] sm:text-xs text-gray-400 line-through">
                 {currency} {Math.round(effPrice).toLocaleString()}
               </span>
             )}

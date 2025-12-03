@@ -21,12 +21,14 @@ import OurPolicy from './components/OurPolicy';
 import 'react-phone-input-2/lib/style.css';
 import UploadProof from './pages/UploadProof';
 import FeaturesSection from './components/FeaturesSection';
+import { Toaster } from "react-hot-toast"; 
 
 const App = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
       <ScrollToTop /> {/* 👈 Add this line */}
+         <Toaster position="top-center" /> 
       
       <main className="">
         <Routes>
