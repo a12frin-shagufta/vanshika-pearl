@@ -123,7 +123,12 @@ const Product = () => {
         // set active media index to first media of chosen variant if media exist
         const allMedia = buildAllMedia(foundProduct);
         if (allMedia.length > 0) {
-          const idx = firstInStock ? allMedia.findIndex((m) => m.variantId === firstInStock._id) : 0;
+          const idx = firstInStock
+  ? allMedia.findIndex(
+      (m) => m.variantId === firstInStock._id && m.type === "image"
+    )
+  : 0;
+
           setActiveMediaIndex(idx >= 0 ? idx : 0);
         } else {
           setActiveMediaIndex(0);
@@ -316,8 +321,11 @@ const trySelectVariant = (variant, preferredIndex = null) => {
   } else {
     // just default to first media (could be image or video)
     const idx = currentAll.findIndex(
-      (m) => String(m.variantId) === String(variant._id)
-    );
+  (m) =>
+    String(m.variantId) === String(variant._id) &&
+    m.type === "image"
+);
+
     setActiveMediaIndex(idx >= 0 ? idx : 0);
   }
 };
