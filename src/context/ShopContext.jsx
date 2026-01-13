@@ -29,6 +29,13 @@ const ShopContextProvider = (props) => {
   const [offers, setOffers] = useState([]);
   const [loadingProducts, setLoadingProducts] = useState(true);
   const [categories, setCategories] = useState([]);
+  const [isCartOpen, setIsCartOpen] = useState(false);
+
+const openCartDrawer = () => setIsCartOpen(true);
+const closeCartDrawer = () => setIsCartOpen(false);
+
+
+  
 
   // CART: use an array of items { productId, variantId, variantColor, quantity }
  const [cartItems, setCartItems] = useState(() => {
@@ -334,7 +341,11 @@ const addToCart = (
     categories,
     setCategories,
     delivery_fee,
+    isCartOpen,
+  openCartDrawer,
+  closeCartDrawer,
     // cart:
+
     addToCart,
     cartItems,
     updateQuantity,          // backward-compatible

@@ -1,35 +1,43 @@
-import React from 'react';
-import { Routes, Route } from 'react-router-dom';
-import Home from './pages/Home';
-import Collection from './pages/Collection';
-import About from './pages/About';
-import Contact from './pages/Contact';
-import Product from './pages/Product';
-import PlaceOrder from './pages/PlaceOrder';
-import Order from './pages/Order';
-import Navbar from './components/Navbar';
-import Footer from './components/Footer';
-import Cart from './pages/Cart';
-import ThankYou from './pages/ThankYou';
-import RefundPolicy from './components/RefundPolicy';
-import TermsConditions from './components/TermsConditions';
-import PrivacyPolicy from './components/PrivacyPolicy';
-import ScrollToTop from './components/ScrollToTop'; // 👈 Import
-import Testimonial from './pages/Testimonial';
-import BestSeller from './components/BestSeller';
-import OurPolicy from './components/OurPolicy';
-import 'react-phone-input-2/lib/style.css';
-import UploadProof from './pages/UploadProof';
-import FeaturesSection from './components/FeaturesSection';
-import { Toaster } from "react-hot-toast"; 
+import React, { useContext } from "react";
+import { Routes, Route } from "react-router-dom";
+
+import Home from "./pages/Home";
+import Collection from "./pages/Collection";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
+import Product from "./pages/Product";
+import PlaceOrder from "./pages/PlaceOrder";
+import Order from "./pages/Order";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import Cart from "./pages/Cart";
+import ThankYou from "./pages/ThankYou";
+import RefundPolicy from "./components/RefundPolicy";
+import TermsConditions from "./components/TermsConditions";
+import PrivacyPolicy from "./components/PrivacyPolicy";
+import ScrollToTop from "./components/ScrollToTop";
+import Testimonial from "./pages/Testimonial";
+import BestSeller from "./components/BestSeller";
+import OurPolicy from "./components/OurPolicy";
+import UploadProof from "./pages/UploadProof";
+import FeaturesSection from "./components/FeaturesSection";
+
+import CartDrawer from "./components/CartDrawer"; // ✅ ADD THIS
+
+import "react-phone-input-2/lib/style.css";
+import { Toaster } from "react-hot-toast";
+
+import { ShopContext } from "./context/ShopContext";
 
 const App = () => {
+  const { isCartOpen, closeCartDrawer } = useContext(ShopContext); // ✅ ADD THIS
+
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
-      <ScrollToTop /> {/* 👈 Add this line */}
-         <Toaster position="top-center" /> 
-      
+      <ScrollToTop />
+      <Toaster position="top-center" />
+
       <main className="">
         <Routes>
           <Route path="/" element={<Home />} />
@@ -47,9 +55,12 @@ const App = () => {
           <Route path="/testimonials" element={<Testimonial />} />
           <Route path="/bestseller" element={<BestSeller />} />
           <Route path="/our-policy" element={<OurPolicy />} />
-           <Route path="/upload-proof" element={<UploadProof />} />
+          <Route path="/upload-proof" element={<UploadProof />} />
           <Route path="/features" element={<FeaturesSection />} />
         </Routes>
+
+        {/* ✅ Keep Drawer OUTSIDE Routes */}
+        <CartDrawer isOpen={isCartOpen} onClose={closeCartDrawer} />
       </main>
 
       <Footer />

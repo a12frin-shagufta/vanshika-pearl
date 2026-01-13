@@ -18,7 +18,8 @@ import ProductItem from "../components/ProductItem";
 const Product = () => {
   // --- hooks (stable order) ---
   const { productId } = useParams();
-  const { products, currency, addToCart } = useContext(ShopContext);
+  const { products, currency, addToCart, openCartDrawer } = useContext(ShopContext);
+
    const [firstName, setFirstName] = useState("");
   const [lastName,  setLastName]  = useState("");
   const navigate = useNavigate();
@@ -232,9 +233,12 @@ const allMedia = buildAllMedia(product);
     product._id,
     quantity,
     selectedVariant?._id,
+    
     selectedVariant?.color,
     { engravingFirstName: firstName.trim(), engravingLastName: lastName.trim() } // ✅ pass names
   );
+  openCartDrawer();
+
 
   setTimeout(() => setIsAddingToCart(false), 800);
 };

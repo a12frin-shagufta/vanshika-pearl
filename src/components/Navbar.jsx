@@ -7,7 +7,8 @@ import { FaFacebookF, FaInstagram, FaYoutube, FaTiktok, FaWhatsapp } from "react
 import { ShopContext } from "../context/ShopContext";
 
 const Navbar = () => {
-  const { getCartCount } = useContext(ShopContext);
+ const { getCartCount, openCartDrawer } = useContext(ShopContext);
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -85,14 +86,19 @@ const Navbar = () => {
             </button> */}
 
             {/* Cart icon - visible on both mobile and desktop */}
-            <NavLink to="/cart" className="relative p-2 rounded hover:bg-gray-100 text-gray-700">
-              <CiShoppingCart className="h-5 w-5" />
-              {getCartCount() > 0 && (
-                <span className="absolute -top-0 -right-0 w-5 h-5 bg-[#eba5aa] text-white text-xs font-bold rounded-full flex items-center justify-center shadow-sm">
-                  {getCartCount()}
-                </span>
-              )}
-            </NavLink>
+            <button
+  onClick={openCartDrawer}
+  className="relative p-2 rounded hover:bg-gray-100 text-gray-700"
+  aria-label="Open cart"
+>
+  <CiShoppingCart className="h-5 w-5" />
+  {getCartCount() > 0 && (
+    <span className="absolute -top-0 -right-0 w-5 h-5 bg-[#eba5aa] text-white text-xs font-bold rounded-full flex items-center justify-center shadow-sm">
+      {getCartCount()}
+    </span>
+  )}
+</button>
+
           </div>
         </div>
       </div>
