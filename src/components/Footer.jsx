@@ -124,7 +124,7 @@ const Footer = () => {
           <div className="flex flex-col items-center sm:items-start">
             <h3 className="text-black/80 font-medium mb-3 sm:mb-4 text-sm sm:text-base">Contact Us</h3>
             <ul className="space-y-1 sm:space-y-2 text-xs sm:text-sm text-gray-600">
-              <li>centsandsoul@gmail.com</li>
+              <li>vanshinecollection@gmail.com</li>
               {/* <li>+92 317 1731789</li> */}
             </ul>
           </div>

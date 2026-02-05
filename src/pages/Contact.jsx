@@ -6,7 +6,7 @@ import { toast } from "react-hot-toast";
 
 
 const Contact = () => {
-  const BUSINESS_EMAIL = "centsandsoul@gmail.com";
+  const BUSINESS_EMAIL = "vanshinecollection@gmail.com";
   const INSTAGRAM_URL = "https://www.instagram.com/vanshinecollection/";
 
    const backendUrl = import.meta.env.VITE_BACKEND_URL;

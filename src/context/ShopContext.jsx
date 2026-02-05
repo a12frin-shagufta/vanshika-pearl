@@ -8,6 +8,8 @@ export const ShopContext = createContext();
 const LOCAL_KEY = "guestCart_v2";
 
 const ShopContextProvider = (props) => {
+  console.log("ENV BACKEND =", import.meta.env.VITE_BACKEND_URL);
+
   const currency = "$";
   const delivery_fee = 250;
   const navigate = useNavigate();
