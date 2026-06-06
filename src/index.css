@@ -1,21 +1,14 @@
-
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Libre+Baskerville:wght@400;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600&display=swap');
 
 @import "tailwindcss";
 
-
-
-/* global reset — paste this at top of your global CSS */
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
 
-/* remove browser default margins that cause gaps */
 html, body, #root {
   height: 100%;
   margin: 0;
@@ -24,34 +17,47 @@ html, body, #root {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* prevent tiny horizontal overflow (use on root wrappers) */
 .layout-no-scroll-x {
   overflow-x: hidden;
 }
 
-/* keep your font imports and Tailwind import (or replace with Tailwind directives) */
+:root {
+  --cream: #FAF6F1;
+  --warm-white: #FFFBF5;
+  --sand: #E8DDD3;
+  --taupe: #C4B5A5;
+  --brown: #8B7355;
+  --dark-brown: #5C4A32;
+  --deep-brown: #3D2B1F;
+  --gold: #C4A265;
+  --gold-light: #D4BC8B;
+  --soft-border: #E8DDD3;
+}
 
-
-/* site defaults */
 body {
-   
-  background-color: #fffdf8;
-
-  font-family: 'Inter', sans-serif;
-  color: #000000;
+  background-color: var(--warm-white);
+  font-family: 'Jost', sans-serif;
+  color: #3D2B1F;
+  letter-spacing: 0.01em;
 }
 
-/* custom classes */
-/* h1,h3,h2 {
-  font-family: 'Great Vibes', cursive;
-} */
-h1,h2 {
-  font-family: "Cormorant Garamond", serif;
- 
+h1, h2, h3 {
+  font-family: 'Cormorant Garamond', serif;
 }
 
+/* Subtle Islamic geometric pattern (reusable) */
+.islamic-pattern-bg {
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0L35 5L30 10L25 5Z M0 30L5 25L10 30L5 35Z M60 30L55 25L50 30L55 35Z M30 60L25 55L30 50L35 55Z' fill='%23C4A26510' /%3E%3Cpath d='M30 20L35 25L30 30L25 25Z' fill='%23C4A26508' /%3E%3C/svg%3E");
+}
 
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--cream); }
+::-webkit-scrollbar-thumb { background: var(--taupe); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--brown); }
 
-
-
-
+/* Selection */
+::selection {
+  background: var(--gold-light);
+  color: var(--deep-brown);
+}

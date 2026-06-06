@@ -1,144 +1,64 @@
-import React from 'react';
-import { FaInstagram, FaTiktok, FaWhatsapp } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { FaInstagram, FaTiktok, FaWhatsapp } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer className=" bg-[#FBF2F5] py-10 px-4 sm:px-6 lg:px-8 border-t border-black/30">
+    <footer className="bg-[#D9CDBF] text-[#8C7B6E] py-14 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {/* Brand Column */}
+        {/* Decorative separator */}
+        <div className="flex items-center justify-center mb-12">
+          <div className="h-px w-16 bg-[#C4A265]/30" />
+          <div className="mx-4">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 0L12 8L20 10L12 12L10 20L8 12L0 10L8 8Z" fill="#C4A265" opacity="0.45"/></svg>
+          </div>
+          <div className="h-px w-16 bg-[#C4A265]/30" />
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+          {/* Brand */}
           <div className="flex flex-col items-center sm:items-start">
-            <img 
-              src="/images/logo4.png" 
-              alt="" 
-              className="h-20 w-auto mb-4"
-            />
-            {/* <p className="text-gray-600 text-sm mb-4 sm:mb-6 max-w-xs text-center sm:text-left">
-              Handcrafted jewelry blending tradition with contemporary design
-            </p> */}
-            <div className="flex space-x-4">
-              <a 
-                href="https://instagram.com" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="text-gray-400 transition-colors"
-                aria-label="Instagram"
-              >
-                <FaInstagram className="w-5 h-5" />
-              </a>
-              <a 
-                href="https://tiktok.com" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="text-gray-400  transition-colors"
-                aria-label="TikTok"
-              >
-                <FaTiktok className="w-5 h-5" />
-              </a>
-              <a 
-                href="" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="text-gray-400  transition-colors"
-                aria-label="WhatsApp"
-              >
-                <FaWhatsapp className="w-5 h-5" />
-              </a>
+            <img src="/images/logo4.png" alt="" className="h-16 w-auto mb-5 opacity-75" />
+            <div className="flex gap-4 mt-2">
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-[#8C7B6E]/60 hover:text-[#C4A265] transition-colors"><FaInstagram className="w-4 h-4" /></a>
+              <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" className="text-[#8C7B6E]/60 hover:text-[#C4A265] transition-colors"><FaTiktok className="w-4 h-4" /></a>
+              <a href="" target="_blank" rel="noopener noreferrer" className="text-[#8C7B6E]/60 hover:text-[#C4A265] transition-colors"><FaWhatsapp className="w-4 h-4" /></a>
             </div>
           </div>
 
-          {/* Quick Links Column */}
+          {/* Quick Links */}
           <div className="flex flex-col items-center sm:items-start">
-            <h3 className="text-black/80 font-medium mb-3 sm:mb-4 text-sm sm:text-base">Quick Links</h3>
-            <ul className="space-y-1 sm:space-y-2">
-              <li>
-                 <Link
-    to="/"
-    onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-    className="text-black/80 hover:text-gray-400 text-xs sm:text-sm transition-colors"
-  >
-    Home
-  </Link>
-              </li>
-              <li>
-                <Link 
-                  to="/collection" 
-                  className="text-gray-600 text-xs sm:text-sm transition-colors"
-                >
-                  Shop
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  to="/about" 
-                  className="text-gray-600 text-xs sm:text-sm transition-colors"
-                >
-                  About Us
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  to="/contact" 
-                  className="text-gray-600 text-xs sm:text-sm transition-colors"
-                >
-                  Contact
-                </Link>
-              </li>
+            <h3 className="text-[10px] tracking-[0.25em] uppercase text-[#A0845C] mb-5">Quick Links</h3>
+            <ul className="space-y-2.5">
+              {[{ to: "/", label: "Home" }, { to: "/collection", label: "Shop" }, { to: "/about", label: "About Us" }, { to: "/contact", label: "Contact" }].map(l => (
+                <li key={l.to}><Link to={l.to} className="text-xs text-[#7A6A5E]/80 hover:text-[#A0845C] transition-colors tracking-wide">{l.label}</Link></li>
+              ))}
             </ul>
           </div>
 
-          {/* Policies Column */}
+          {/* Policies */}
           <div className="flex flex-col items-center sm:items-start">
-            <h3 className="text-gray-600 font-medium mb-3 sm:mb-4 text-sm sm:text-base">Policies</h3>
-            <ul className="space-y-1 sm:space-y-2">
-              <li>
-                <Link 
-                  to="/refund-policy" 
-                  className="text-gray-600 text-xs sm:text-sm transition-colors"
-                >
-                  Refund Policy
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  to="/terms-conditions" 
-                  className="text-gray-600 text-xs sm:text-sm transition-colors"
-                >
-                  Terms & Conditions
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  to="/privacy-policy" 
-                  className="text-gray-600 text-xs sm:text-sm transition-colors"
-                >
-                  Privacy Policy
-                </Link>
-              </li>
-              
+            <h3 className="text-[10px] tracking-[0.25em] uppercase text-[#A0845C] mb-5">Policies</h3>
+            <ul className="space-y-2.5">
+              {[{ to: "/refund-policy", label: "Refund Policy" }, { to: "/terms-conditions", label: "Terms & Conditions" }, { to: "/privacy-policy", label: "Privacy Policy" }].map(l => (
+                <li key={l.to}><Link to={l.to} className="text-xs text-[#7A6A5E]/80 hover:text-[#A0845C] transition-colors tracking-wide">{l.label}</Link></li>
+              ))}
             </ul>
           </div>
 
-          {/* Contact Column */}
+          {/* Contact */}
           <div className="flex flex-col items-center sm:items-start">
-            <h3 className="text-black/80 font-medium mb-3 sm:mb-4 text-sm sm:text-base">Contact Us</h3>
-            <ul className="space-y-1 sm:space-y-2 text-xs sm:text-sm text-gray-600">
+            <h3 className="text-[10px] tracking-[0.25em] uppercase text-[#A0845C] mb-5">Contact Us</h3>
+            <ul className="space-y-2.5 text-xs text-[#7A6A5E]/80 tracking-wide">
               <li>vanshinecollection@gmail.com</li>
-              {/* <li>+92 317 1731789</li> */}
             </ul>
           </div>
         </div>
 
-        {/* Copyright Section */}
-        <div className="  mt-6 pt-6 text-center">
-          <p className="text-xs text-gray-600">
-            &copy; {new Date().getFullYear()}  vanshinecollection
-. All rights reserved. 
+        <div className="mt-12 pt-6 border-t border-[#C4A265]/20 text-center">
+          <p className="text-[10px] text-[#7A6A5E]/50 tracking-widest uppercase">
+            &copy; {new Date().getFullYear()} vanshinecollection. All rights reserved.
           </p>
-          {/* <p className="text-xs text-gray-600 mt-1">
-            Handmade with love in Pakistan
-          </p> */}
         </div>
       </div>
     </footer>

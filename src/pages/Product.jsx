@@ -48,7 +48,7 @@ const Product = () => {
  const PLACEHOLDER_IMG =
   "data:image/svg+xml;utf8," +
   encodeURIComponent(
-    `<svg xmlns='http://www.w3.org/2000/svg' width='400' height='300'><rect width='100%' height='100%' fill='#f3f4f6'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' fill='#9ca3af' font-family='Arial' font-size='20'>No image</text></svg>`
+    `<svg xmlns='http://www.w3.org/2000/svg' width='400' height='300'><rect width='100%' height='100%' fill='#F5F0EB'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' fill='#C4B5A5' font-family='Arial' font-size='20'>No image</text></svg>`
   );
 
 
@@ -174,7 +174,7 @@ const Product = () => {
   if (!product) {
     return (
       <div className="min-h-screen flex justify-center items-center">
-        <div className="animate-pulse text-xl text-amber-700">Loading product...</div>
+        <div className="animate-pulse text-xl text-[#8B7355]">Loading product...</div>
       </div>
     );
   }
@@ -424,7 +424,7 @@ const renderMainMedia = (media) => {
     <motion.div className="min-h-screen py-12 px-4 sm:px-6 lg:px-8" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
       <div className="max-w-7xl mx-auto">
         <div className="flex items-center justify-between mb-8">
-          <button onClick={() => navigate(-1)} className="flex items-center text-gray-600 transition-colors">
+          <button onClick={() => navigate(-1)} className="flex items-center text-[#8B7355] transition-colors">
             <FiArrowLeft className="mr-2" />
             Back to Collection
           </button>
@@ -454,13 +454,13 @@ const renderMainMedia = (media) => {
       className="absolute bottom-4 right-4 bg-white p-2 rounded-full shadow-md z-20"
       aria-label="Zoom image"
     >
-      <FiZoomIn className="text-gray-700" />
+      <FiZoomIn className="text-[#5C4A32]" />
     </button>
   )}
 
   {/* discount badge stays */}
   {discountPercentage > 0 && (
-    <div className="absolute top-4 left-4 bg-green-600 text-white px-3 py-1 rounded-full text-sm font-bold z-20">
+    <div className="absolute top-4 left-4 bg-[#C4A265] text-white px-3 py-1 rounded-full text-sm font-bold z-20">
       -{discountPercentage}%
     </div>
   )}
@@ -482,7 +482,7 @@ const renderMainMedia = (media) => {
         }
       }}
       className={`relative flex-shrink-0 w-16 h-16 rounded-md border-2 overflow-hidden ${
-        activeMediaIndex === index ? "border-amber-600" : "border-gray-200"
+        activeMediaIndex === index ? "border-[#C4A265]" : "border-[#E8DDD3]"
       }`}
       title={m.type === "video" ? "Video" : "Image"}
     >
@@ -584,20 +584,20 @@ const renderMainMedia = (media) => {
 
           {/* Right: Info */}
           <div className="space-y-6">
-            <h1 className="text-3xl font-serif font-light text-black/80 flex items-center gap-4">
+            <h1 className="text-3xl font-light text-[#3D2B1F] tracking-wide flex items-center gap-4">
               {product.name}
-              {selectedAvailable <= 0 && <span className="ml-3 inline-block bg-red-600 text-white px-3 py-1 rounded-full text-sm font-semibold">Out of stock</span>}
+              {selectedAvailable <= 0 && <span className="ml-3 inline-block bg-[#8B7355] text-white px-3 py-1 rounded-full text-sm font-semibold">Out of stock</span>}
             </h1>
 
             {/* Price */}
             <div className="space-y-1">
               {product.finalPrice && product.finalPrice < product.price ? (
                 <>
-                  <span className="text-3xl font-medium text-black/80">{currency} {product.finalPrice.toLocaleString()}</span>
-                  <span className="block text-lg text-gray-500 line-through">{currency} {product.price.toLocaleString()}</span>
+                  <span className="text-3xl font-medium text-[#3D2B1F]">{currency} {product.finalPrice.toLocaleString()}</span>
+                  <span className="block text-lg text-[#C4B5A5] line-through">{currency} {product.price.toLocaleString()}</span>
                 </>
               ) : (
-                <span className="text-3xl font-medium text-black/80">{currency} {product.price.toLocaleString()}</span>
+                <span className="text-3xl font-medium text-[#3D2B1F]">{currency} {product.price.toLocaleString()}</span>
               )}
             </div>
 
@@ -606,13 +606,13 @@ const renderMainMedia = (media) => {
 <div className="grid grid-cols-2 gap-3 text-sm">
   {product.material && (
     <div className="flex items-center">
-      <FaGem className="text-amber-600 mr-2" />
+      <FaGem className="text-[#C4A265] mr-2" />
       <span>{product.material.type} {product.material.purity}</span>
     </div>
   )}
   {product.weight && (
     <div className="flex items-center">
-      <FaWeightHanging className="text-amber-600 mr-2" />
+      <FaWeightHanging className="text-[#C4A265] mr-2" />
       <span>{product.weight}g</span>
     </div>
   )}
@@ -620,7 +620,7 @@ const renderMainMedia = (media) => {
   {/* 💡 Add this: */}
   {product.size && (
     <div className="flex items-center">
-      <span className="text-amber-600 mr-2">Size:</span>
+      <span className="text-[#C4A265] mr-2">Size:</span>
       <span>{product.size}</span>
     </div>
   )}
@@ -629,8 +629,8 @@ const renderMainMedia = (media) => {
 
             {/* Variants */}
             {product.variants?.length > 0 && (
-              <div className="pt-6 border-t border-gray-100">
-                <h3 className="text-sm font-semibold text-gray-800 mb-4 uppercase tracking-wider">SELECT COLOR: <span className="text-pink-600">{selectedVariant?.color}</span></h3>
+              <div className="pt-6 border-t border-[#E8DDD3]">
+                <h3 className="text-sm font-semibold text-[#3D2B1F] mb-4 uppercase tracking-wider">SELECT COLOR: <span className="text-[#C4A265]">{selectedVariant?.color}</span></h3>
                 <div className="flex flex-wrap gap-3">
              {product.variants.map((variant) => {
   const available = variantStock(variant);
@@ -651,7 +651,7 @@ const renderMainMedia = (media) => {
       onClick={() => trySelectVariant(variant)}
       disabled={disabled}
       className={`relative flex items-center justify-center w-12 h-12 rounded-full border-2 transition-all 
-        ${selected ? "border-pink-500 shadow-lg" : "border-gray-300 hover:border-pink-300"} 
+        ${selected ? "border-[#C4A265] shadow-lg" : "border-[#E8DDD3] hover:border-[#D4BC8B]"} 
         ${disabled ? "opacity-40 cursor-not-allowed" : ""}`}
       title={disabled ? "Out of stock" : `${variant.color} — ${available} available`}
     >
@@ -666,9 +666,9 @@ const renderMainMedia = (media) => {
       )}
 
       {selected && !disabled && (
-        <FiCheck className="absolute text-white text-sm bg-pink-500 rounded-full p-1" />
+        <FiCheck className="absolute text-white text-sm bg-[#C4A265] rounded-full p-1" />
       )}
-      {disabled && <div className="absolute -bottom-5 text-xs text-gray-500">Out</div>}
+      {disabled && <div className="absolute -bottom-5 text-xs text-[#C4B5A5]">Out</div>}
     </button>
   );
 })}
@@ -682,33 +682,33 @@ const renderMainMedia = (media) => {
             
 
             {/* Quantity & Buttons */}
-            <div className="pt-6 border-t border-gray-100 space-y-6">
+            <div className="pt-6 border-t border-[#E8DDD3] space-y-6">
               <div className="flex items-center justify-between">
-                <span className="text-sm font-semibold text-gray-800">Quantity</span>
-                <div className="flex items-center border border-gray-200 rounded-xl overflow-hidden">
-                  <button onClick={() => setQuantity(Math.max(1, quantity - 1))} className="px-4 py-2 text-gray-600 hover:bg-gray-50 transition-colors">-</button>
-                  <span className="px-6 py-2 font-medium text-gray-900 min-w-[3rem] text-center">{quantity}</span>
-                  <button onClick={() => setQuantity((q) => Math.min(selectedAvailable || 1, q + 1))} className="px-4 py-2 text-gray-600 hover:bg-gray-50 transition-colors">+</button>
+                <span className="text-sm font-semibold text-[#3D2B1F]">Quantity</span>
+                <div className="flex items-center border border-[#E8DDD3] rounded-none overflow-hidden">
+                  <button onClick={() => setQuantity(Math.max(1, quantity - 1))} className="px-4 py-2 text-[#8B7355] hover:bg-[#FAF6F1] transition-colors">-</button>
+                  <span className="px-6 py-2 font-medium text-[#3D2B1F] min-w-[3rem] text-center">{quantity}</span>
+                  <button onClick={() => setQuantity((q) => Math.min(selectedAvailable || 1, q + 1))} className="px-4 py-2 text-[#8B7355] hover:bg-[#FAF6F1] transition-colors">+</button>
                 </div>
               </div>
 
               <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
   {/* <div>
-    <label className="block text-sm text-gray-700 mb-1">customization ( if any)</label>
+    <label className="block text-sm text-[#5C4A32] mb-1">customization ( if any)</label>
     <input
       value={firstName}
       onChange={(e) => setFirstName(normalize(e.target.value))}
       placeholder="optional"
-      className="w-full rounded-md border border-gray-300 px-3 py-2 focus:ring-amber-500 focus:border-amber-500"
+      className="w-full rounded-md border border-[#E8DDD3] px-3 py-2 focus:ring-amber-500 focus:border-amber-500"
     />
   </div> */}
   {/* <div>
-    <label className="block text-sm text-gray-700 mb-1">Last name (engraving)</label>
+    <label className="block text-sm text-[#5C4A32] mb-1">Last name (engraving)</label>
     <input
       value={lastName}
       onChange={(e) => setLastName(normalize(e.target.value))}
       placeholder="Last Name"
-      className="w-full rounded-md border border-gray-300 px-3 py-2 focus:ring-amber-500 focus:border-amber-500"
+      className="w-full rounded-md border border-[#E8DDD3] px-3 py-2 focus:ring-amber-500 focus:border-amber-500"
     />
   </div> */}
 </div>
@@ -716,12 +716,12 @@ const renderMainMedia = (media) => {
 
               <div className="flex space-x-4">
                 
-                <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} onClick={handleAddToCart} disabled={!selectedVariant || isAddingToCart || selectedAvailable <= 0} className={`flex-1 py-4 rounded-xl font-semibold flex items-center justify-center space-x-3 transition-all ${!selectedVariant || selectedAvailable <= 0 ? "bg-gray-300 text-gray-500 cursor-not-allowed" : "bg-[#eba5aa] text-white hover:from-amber-700 hover:to-amber-700  hover:shadow-xl"}`}>
+                <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} onClick={handleAddToCart} disabled={!selectedVariant || isAddingToCart || selectedAvailable <= 0} className={`flex-1 py-4 rounded-none font-semibold flex items-center justify-center space-x-3 transition-all ${!selectedVariant || selectedAvailable <= 0 ? "bg-gray-300 text-[#C4B5A5] cursor-not-allowed" : "bg-[#3D2B1F] text-white hover:bg-[#5C4A32]"}`}>
                   <FiShoppingCart />
                   <span>{isAddingToCart ? "Adding..." : selectedAvailable <= 0 ? "Out of Stock" : "Add to Cart"}</span>
                 </motion.button>
 
-                <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} onClick={handleBuyNow} disabled={!selectedVariant || selectedAvailable <= 0 || isProcessingPurchase} className={`flex-1 py-4 rounded-xl font-semibold flex items-center justify-center transition-all ${!selectedVariant || selectedAvailable <= 0 ? "bg-gray-300 text-gray-500 cursor-not-allowed" : "bg-gray-800 text-white hover:bg-gray-800  hover:shadow-xl"}`}>
+                <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} onClick={handleBuyNow} disabled={!selectedVariant || selectedAvailable <= 0 || isProcessingPurchase} className={`flex-1 py-4 rounded-none font-semibold flex items-center justify-center transition-all ${!selectedVariant || selectedAvailable <= 0 ? "bg-gray-300 text-[#C4B5A5] cursor-not-allowed" : "bg-[#C4A265] text-white hover:bg-[#8B7355]"}`}>
                   {isProcessingPurchase ? "Processing..." : "Buy Now"}
                 </motion.button>
               </div>
@@ -730,19 +730,19 @@ const renderMainMedia = (media) => {
             </div>
 
             {/* Description */}
-            <div className="pt-4 border-t border-amber-100">
-              <h3 className="text-lg font-medium text-black/80 mb-3">Description</h3>
-              <p className="text-gray-700 leading-relaxed whitespace-pre-line">{product.description || "No description available."}</p>
+            <div className="pt-4 border-t border-[#E8DDD3]">
+              <h3 className="text-lg font-medium text-[#3D2B1F] mb-3">Description</h3>
+              <p className="text-[#5C4A32] leading-relaxed whitespace-pre-line">{product.description || "No description available."}</p>
 
               {product.details && (
                 <div className="mt-6">
-                  <h4 className="text-md font-medium text-black/80 mb-2">Product Details</h4>
+                  <h4 className="text-md font-medium text-[#3D2B1F] mb-2">Product Details</h4>
                   {Array.isArray(product.details) ? (
-                    <ul className="list-disc list-inside space-y-1 text-gray-700 text-sm">
+                    <ul className="list-disc list-inside space-y-1 text-[#5C4A32] text-sm">
                       {product.details.map((detail, i) => (<li key={i}>{detail}</li>))}
                     </ul>
                   ) : (
-                    <p className="text-sm text-gray-700">{product.details}</p>
+                    <p className="text-sm text-[#5C4A32]">{product.details}</p>
                   )}
                 </div>
               )}
@@ -750,19 +750,19 @@ const renderMainMedia = (media) => {
 
             {/* FAQ */}
             {product.faqs && product.faqs.length > 0 && (
-              <div className="pt-6 border-t border-amber-100">
-                <h3 className="text-lg font-medium text-amber-900 mb-4">Frequently Asked Questions</h3>
+              <div className="pt-6 border-t border-[#E8DDD3]">
+                <h3 className="text-lg font-medium text-[#3D2B1F] mb-4">Frequently Asked Questions</h3>
                 <div className="space-y-3">
                   {product.faqs.map((faq, idx) => (
-                    <div key={idx} className="border rounded-lg overflow-hidden">
-                      <button onClick={() => setOpenFaqIndex(openFaqIndex === idx ? null : idx)} className="w-full flex justify-between items-center px-4 py-3 text-left font-medium text-gray-800 hover:bg-amber-50">
+                    <div key={idx} className="border rounded-none overflow-hidden">
+                      <button onClick={() => setOpenFaqIndex(openFaqIndex === idx ? null : idx)} className="w-full flex justify-between items-center px-4 py-3 text-left font-medium text-[#3D2B1F] hover:bg-[#FAF6F1]">
                         {faq.question}
                         <FiChevronDown className={`transform transition-transform ${openFaqIndex === idx ? "rotate-180" : ""}`} />
                       </button>
 
                       <AnimatePresence>
                         {openFaqIndex === idx && (
-                          <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.3 }} className="px-4 pb-3 text-gray-600 text-sm bg-amber-50/30">
+                          <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.3 }} className="px-4 pb-3 text-[#8B7355] text-sm bg-[#FAF6F1]/30">
                             {faq.answer}
                           </motion.div>
                         )}
@@ -774,16 +774,16 @@ const renderMainMedia = (media) => {
             )}
 
             {/* Share */}
-            <div className="pt-4 border-t border-amber-100 flex justify-between items-center text-sm">
+            <div className="pt-4 border-t border-[#E8DDD3] flex justify-between items-center text-sm">
               <button onClick={() => {
                 const shareUrl = `${window.location.origin}/product/${productId}`;
                 const shareData = { title: product.name, text: `Check out this piece: ${product.name}`, url: shareUrl };
                 if (navigator.share) navigator.share(shareData).catch((err) => console.log("Share failed:", err));
                 else { navigator.clipboard.writeText(shareUrl); alert("Link copied to clipboard!"); }
-              }} className="flex items-center text-gray-600 hover:text-amber-700 transition-all">
+              }} className="flex items-center text-[#8B7355] hover:text-[#8B7355] transition-all">
                 <FiShare2 className="mr-2" /> Share
               </button>
-              {/* <span className="text-gray-500">Handcrafted with ❤️</span> */}
+              {/* <span className="text-[#C4B5A5]">Handcrafted with ❤️</span> */}
             </div>
           </div>
         </div>
@@ -791,7 +791,7 @@ const renderMainMedia = (media) => {
       </div>
       {relatedProducts && relatedProducts.length > 0 && (
   <div className="mt-12 border-t pt-8">
-    <h3 className="text-2xl font-semibold text-amber-900 mb-4">Related products</h3>
+    <h3 className="text-2xl font-semibold text-[#3D2B1F] mb-4">Related products</h3>
     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-3 gap-6">
       {relatedProducts.map((rp) => (
         <ProductItem
