@@ -20,17 +20,17 @@ const Footer = () => {
           <div className="flex flex-col items-center sm:items-start">
             <img src="/images/logo4.png" alt="" className="h-16 w-auto mb-5 opacity-75" />
             <div className="flex gap-4 mt-2">
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-[#8C7B6E]/60 hover:text-[#C4A265] transition-colors"><FaInstagram className="w-4 h-4" /></a>
-              <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" className="text-[#8C7B6E]/60 hover:text-[#C4A265] transition-colors"><FaTiktok className="w-4 h-4" /></a>
-              <a href="" target="_blank" rel="noopener noreferrer" className="text-[#8C7B6E]/60 hover:text-[#C4A265] transition-colors"><FaWhatsapp className="w-4 h-4" /></a>
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-[#C4A265] hover:text-[#C4A265] transition-colors"><FaInstagram className="w-4 h-4" /></a>
+              <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" className="text-[#C4A265] hover:text-[#C4A265] transition-colors"><FaTiktok className="w-4 h-4" /></a>
+              <a href="" target="_blank" rel="noopener noreferrer" className="text-[#C4A265] hover:text-[#C4A265] transition-colors"><FaWhatsapp className="w-4 h-4" /></a>
             </div>
           </div>
 
           {/* Quick Links */}
           <div className="flex flex-col items-center sm:items-start">
-            <h3 className="text-[10px] tracking-[0.25em] uppercase text-[#A0845C] mb-5">Quick Links</h3>
+            <h3 className="text-[10px] tracking-[0.25em] uppercase text-[#000] mb-5 font-bold">Quick Links</h3>
             <ul className="space-y-2.5">
-              {[{ to: "/", label: "Home" }, { to: "/collection", label: "Shop" }, { to: "/about", label: "About Us" }, { to: "/contact", label: "Contact" }].map(l => (
+              {[{ to: "/", label: "Home" }, { to: "/collection", label: "Catalog" }, { to: "/wholesale", label: "Wholesale" }, { to: "/contact", label: "Contact" }].map(l => (
                 <li key={l.to}><Link to={l.to} className="text-xs text-[#7A6A5E]/80 hover:text-[#A0845C] transition-colors tracking-wide">{l.label}</Link></li>
               ))}
             </ul>
@@ -38,7 +38,7 @@ const Footer = () => {
 
           {/* Policies */}
           <div className="flex flex-col items-center sm:items-start">
-            <h3 className="text-[10px] tracking-[0.25em] uppercase text-[#A0845C] mb-5">Policies</h3>
+            <h3 className="text-[10px] tracking-[0.25em] uppercase text-[#000] font-bold mb-5">Policies</h3>
             <ul className="space-y-2.5">
               {[{ to: "/refund-policy", label: "Refund Policy" }, { to: "/terms-conditions", label: "Terms & Conditions" }, { to: "/privacy-policy", label: "Privacy Policy" }].map(l => (
                 <li key={l.to}><Link to={l.to} className="text-xs text-[#7A6A5E]/80 hover:text-[#A0845C] transition-colors tracking-wide">{l.label}</Link></li>
@@ -48,7 +48,7 @@ const Footer = () => {
 
           {/* Contact */}
           <div className="flex flex-col items-center sm:items-start">
-            <h3 className="text-[10px] tracking-[0.25em] uppercase text-[#A0845C] mb-5">Contact Us</h3>
+            <h3 className="text-[10px] tracking-[0.25em] uppercase text-[#000] font-bold mb-5">Contact Us</h3>
             <ul className="space-y-2.5 text-xs text-[#7A6A5E]/80 tracking-wide">
               <li>vanshinecollection@gmail.com</li>
             </ul>

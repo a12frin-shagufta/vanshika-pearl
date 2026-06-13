@@ -8,6 +8,8 @@ import About from './About'
 import Testimonial from './Testimonial'
 import ShopByCollection from '../components/ShopByCollection'
 import FreaturesSection from '../components/FeaturesSection'
+import Wholesale from '../components/Wholesale'
+import MakingProcess from '../components/MakingProcess'
 
 const Home = () => {
   return (
@@ -19,11 +21,14 @@ const Home = () => {
       {/* CONTENT CONTAINER */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-        <ShopByCollection/>
+       
         <LatestCollection/>
+         <ShopByCollection/>
+         <Wholesale/>
         <BestSeller/>
           {/* <About/>   */}
         <FreaturesSection/>
+                <MakingProcess />
          
         {/* <Testimonial/> */}
         {/* <OurPolicy/>

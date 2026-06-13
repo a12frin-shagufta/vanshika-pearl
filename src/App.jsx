@@ -21,9 +21,11 @@ import BestSeller from "./components/BestSeller";
 import OurPolicy from "./components/OurPolicy";
 import UploadProof from "./pages/UploadProof";
 import FeaturesSection from "./components/FeaturesSection";
+import Wholesale from "./components/Wholesale"; // ✅ ADD THIS
 
 import CartDrawer from "./components/CartDrawer"; // ✅ ADD THIS
-
+import MakingProcess from "./components/MakingProcess";
+import WholesaleProducts from "./pages/WholesaleProducts";
 import "react-phone-input-2/lib/style.css";
 import { Toaster } from "react-hot-toast";
 
@@ -57,10 +59,13 @@ const App = () => {
           <Route path="/our-policy" element={<OurPolicy />} />
           <Route path="/upload-proof" element={<UploadProof />} />
           <Route path="/features" element={<FeaturesSection />} />
+          <Route path="/wholesale" element={<Wholesale />} /> {/* ✅ ADD THIS */}
+          <Route path="/wholesale/products" element={<WholesaleProducts />} /> {/* ✅ ADD THIS */}
         </Routes>
 
         {/* ✅ Keep Drawer OUTSIDE Routes */}
         <CartDrawer isOpen={isCartOpen} onClose={closeCartDrawer} />
+
       </main>
 
       <Footer />

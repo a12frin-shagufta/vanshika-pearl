@@ -90,6 +90,7 @@ const Contact = () => {
                     className={`w-full py-3 text-xs tracking-[0.22em] uppercase transition-colors ${isSubmitting ? "bg-[#FAF7F2] text-[#C4B5A5] cursor-not-allowed" : "bg-[#C4A265] text-white hover:bg-[#C4A265]"}`}>
                     {isSubmitting ? "Sending..." : "Submit"}
                   </button>
+                  
                 </div>
               </form>
             </div>
