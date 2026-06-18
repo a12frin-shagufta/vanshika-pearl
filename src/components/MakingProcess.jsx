@@ -4,24 +4,15 @@ import { useState } from "react";
 const videos = [
   {
     id: 1,
-    src: "/video/v1.mp4",
-    poster: "https://i.pinimg.com/736x/0c/5b/b1/0c5bb1b9b5eeedaa58598bd0cf3e056a.jpg",
+    src: "/video/v2.mp4",
     title: "The Foundation",
     subtitle: "Preparing the canvas",
   },
   {
     id: 2,
-    src: "/video/v1.mp4",
-    poster: "https://i.pinimg.com/736x/b2/1c/41/b21c41ed45e56b7ac9b5fb8f226e15e2.jpg",
+    src: "/video/v3.mp4",
     title: "The Calligraphy",
     subtitle: "Writing sacred verses",
-  },
-  {
-    id: 3,
-    src: "/video/v1.mp4",
-    poster: "https://i.pinimg.com/1200x/93/f7/ad/93f7add06c8d8c3337d922cbff1a2386.jpg",
-    title: "The Embellishment",
-    subtitle: "Gold & pearl detailing",
   },
 ];
 
@@ -69,7 +60,7 @@ export default function MakingProcess() {
         </div>
 
         {/* Video Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
           {videos.map((item) => (
             <div
               key={item.id}
@@ -78,14 +69,15 @@ export default function MakingProcess() {
             >
               {/* Video wrapper */}
               <div className="relative overflow-hidden aspect-[9/16] md:aspect-[3/4] bg-[#2a1f0e]">
-                <video
-                  className="process-video w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  src={item.src}
-                  poster={item.poster}
-                  playsInline
-                  loop
-                  preload="metadata"
-                />
+     <video
+  className="process-video w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+  src={item.src}
+  muted
+  playsInline
+  preload="auto"
+  autoPlay
+  loop
+/>
 
                 {/* Overlay */}
                 <div
